@@ -24,10 +24,6 @@
   input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   button{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;cursor:pointer}
   button:hover{background:var(--accent-soft)}
-  .stats{display:flex;flex-wrap:wrap;gap:24px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-  .stat .k{font-size:12px;color:var(--muted)}
-  .stat .v{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
-  .stat .s{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
   table{width:100%;border-collapse:collapse}
   th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
   th{font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);background:#faf9f6;
@@ -96,9 +92,6 @@
         <select id="grp"></select>
       </div>
       <button id="reset" type="button">Xóa lọc</button>
-    </div>
-    <div class="stats" aria-live="polite">
-      <div class="stat"><div class="k">Số lượt</div><div class="v" id="stCount">0</div></div>
     </div>
   </div>
 
@@ -188,9 +181,7 @@
     var el = {
       q: document.getElementById('q'), grp: document.getElementById('grp'),
       reset: document.getElementById('reset'),
-      tbody: document.querySelector('#tbl tbody'), empty: document.getElementById('empty'),
-      stCount: document.getElementById('stCount'),
-      stCountAll: document.getElementById('stCountAll')
+      tbody: document.querySelector('#tbl tbody'), empty: document.getElementById('empty')
     };
     var sortKey = null, sortDir = 1;
 
@@ -253,7 +244,6 @@
       el.tbody.textContent = '';
       el.tbody.appendChild(frag);
       el.empty.hidden = rows.length > 0;
-      el.stCount.textContent = fmt.format(rows.length);
       Array.prototype.forEach.call(document.querySelectorAll('th.sortable'), function(th){
         th.querySelector('.arrow').textContent = (th.dataset.key === sortKey) ? (sortDir > 0 ? '▲' : '▼') : '';
       });
